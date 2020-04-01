@@ -1,0 +1,39 @@
+﻿@page
+@model Build.Pages.LogReg.LoginModel
+
+<div class="container row p-0 m-0">
+    <div class="col-9">
+        <h2 class="text-info">User info</h2>
+    </div>
+    <div class="col-12 border p-3 m-3">
+        <form method="post">
+            <div>
+                <label asp-for="User.Email"></label>
+                <div class="col-6">
+                    <input asp-for="User.Email" class="form-control" />
+                </div>
+                <span asp-validation-for="User.Email" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="User.Password"></label>
+                <div class="col-6">
+                    <input asp-for="User.Password" class="form-control" />
+                </div>
+                <span class="text-danger">
+                    @Html.DisplayFor(m => Model.Login_trouble)
+                </span>
+            </div>
+            <div>
+                <label></label>
+            </div>
+            <div class="from-group row">
+                <div class="col-3 offset-0">
+                    <input type="submit" value="Login" class="btn btn-primary form-control" />
+                </div>
+                <div class="col-3">
+                    <a asp-page="/Index" class="btn btn-success form-control">Return</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

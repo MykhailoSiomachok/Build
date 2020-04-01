@@ -1,0 +1,112 @@
+﻿@page
+@model Build.Pages.BuildingList.ListModel
+
+<br />
+<form method="post">
+    <div class="container row p-0 m-0">
+        <div class="col-9">
+            <h2 class="text-info">Building List</h2>
+        </div>
+        @if (Model.user_role == "seller")
+        {
+            <div class="col-3">
+                <a asp-page="CreateBuilding" class="btn btn-info form-control text-white">Create new Building</a>
+            </div>
+        }
+        <div class="col-3 offset-1">
+            <input asp-for="SearchInput" class="form-control" />
+        </div>
+        <label></label>
+        <div class="col-2 offset-0">
+            <input type="submit" value="Search" class="btn btn-primary form-control text-white" />
+        </div>
+        <div class="col-3 offset-1">
+            <input asp-for="SortInput" class="form-control" />
+        </div>
+        <label></label>
+        <div class="col-2 offset-0">
+            <input type="submit" value="Sort" class="btn btn-primary form-control text-white" />
+        </div>
+        <div class="col-12 border p-3 m-3">
+            @if (Model.Buildings.Count() > 0)
+            {
+                <table class="table table-striped border">
+                    <tr class="table-secondary">
+                        <th>
+                            <label asp-for="Buildings.FirstOrDefault().Street"></label>
+                        </th>
+                        <th>
+                            <label asp-for="Buildings.FirstOrDefault().Number"></label>
+                        </th>
+                        <th>
+                            <label asp-for="Buildings.FirstOrDefault().Square"></label>
+                        </th>
+                        <th>
+                            <label asp-for="Buildings.FirstOrDefault().Price"></label>
+                        </th>
+                        <th>
+                            <label asp-for="Buildings.FirstOrDefault().Year"></label>
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.Buildings)
+                    {
+                        if (Model.user_role == "seller")
+                        {
+                            @foreach (var entity in Model.Entity)
+                            {
+                                if (Model.user_id == entity.User_id & item.Id == entity.Building_id)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(m => item.Street)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => item.Number)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => item.Square)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => item.Price)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => item.Year)
+                                        </td>
+                                        <td>
+                                            <button asp-page-handler="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</button>
+                                            <a asp-page="Edit" asp-route-id="@item.Id" class="btn btn-success btn-sm text-white">Edit</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(m => item.Street)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.Number)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.Square)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.Price)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.Year)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+            }
+            else
+            {
+                <p>No Buildings Available.</p>
+            }
+        </div>
+    </div>
+</form>
