@@ -7,13 +7,13 @@ using Build.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Build.Pages.LogReg
+namespace Build.Pages.Users
 {
-    public class RegistrationModel : PageModel
+    public class Create_userModel : PageModel
     {
         private readonly ApplicationDBContext _db;
 
-        public RegistrationModel(ApplicationDBContext db)
+        public Create_userModel(ApplicationDBContext db)
         {
             _db = db;
         }
@@ -22,21 +22,19 @@ namespace Build.Pages.LogReg
 
         [BindProperty]
         public string Email_occupied { get; set; }
-        
         public void OnGet(string Email_occupied)
         {
             this.Email_occupied = Email_occupied;
         }
-
         public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid)
             {
                 var email = (from user in _db.User
-                            where user.Email == User.Email
-                            select user.Email).FirstOrDefault();
+                             where user.Email == User.Email
+                             select user.Email).FirstOrDefault();
                 Email_occupied = email + " is occupied";
-                if(Email_occupied != " is occupied")
+                if (Email_occupied != " is occupied")
                 {
                     return RedirectToPage(new { Email_occupied });
                 }
@@ -52,6 +50,5 @@ namespace Build.Pages.LogReg
                 return Page();
             }
         }
-
     }
 }

@@ -19,7 +19,7 @@ namespace Build.Pages.BuildingList
         {
             _db = db;
         }
-        public Building uilding;
+        public Building building;
         public IEnumerable<Building> Buildings { get; set; }
         public IEnumerable<Building_User> Entity { get; set; }
 

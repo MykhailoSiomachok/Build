@@ -1,0 +1,65 @@
+﻿@page
+@model Build.Pages.Users.Building_listModel
+@{
+    ViewData["Title"] = "Building_list";
+}
+<input type="hidden" asp-for="User.Id" />
+<h1>Building_list</h1>
+<div class="col-12 border p-3 m-3">
+    @if (Model.Buildings.Count() > 0)
+    {
+        <table class="table table-striped border">
+            <tr class="table-secondary">
+                <th>
+                    <label asp-for="Buildings.FirstOrDefault().Street"></label>
+                </th>
+                <th>
+                    <label asp-for="Buildings.FirstOrDefault().Number"></label>
+                </th>
+                <th>
+                    <label asp-for="Buildings.FirstOrDefault().Square"></label>
+                </th>
+                <th>
+                    <label asp-for="Buildings.FirstOrDefault().Price"></label>
+                </th>
+                <th>
+                    <label asp-for="Buildings.FirstOrDefault().Year"></label>
+                </th>
+            </tr>
+            @foreach (var item in Model.Buildings)
+            {
+               
+                
+                    @foreach (var entity in Model.Entity)
+                    {
+                        if (Model.user_id == entity.User_id & item.Id == entity.Building_id)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(m => item.Street)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.Number)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.Square)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.Price)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.Year)
+                                </td>
+                            </tr>
+                        }
+                    }
+                
+                
+                }
+            
+        </table>
+    }
+    else
+    {
+        <p>No Buildings Available.</p>
+    }

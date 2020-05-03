@@ -1,0 +1,61 @@
+﻿@page
+@model Build.Pages.Users.User_listModel
+<div class="col-3">
+    <a asp-page="Create_user" class="btn btn-info form-control text-white">Create new User</a>
+</div>
+
+<div class="col-12 border p-3 m-3">
+    @if (Model.Users.Count() > 0)
+    {
+        <table class="table table-striped border">
+            <tr class="table-secondary">
+                <th>
+                    <label asp-for="Users.FirstOrDefault().First_name"></label>
+                </th>
+                <th>
+                    <label asp-for="Users.FirstOrDefault().Last_name"></label>
+                </th>
+                <th>
+                    <label asp-for="Users.FirstOrDefault().Email"></label>
+                </th>
+                <th>
+                    <label asp-for="Users.FirstOrDefault().Password"></label>
+                </th>
+                <th>
+                    <label asp-for="Users.FirstOrDefault().Role"></label>
+                </th>
+                <th>
+                    <label asp-for="Users.FirstOrDefault().Active"></label>
+                </th>
+            </tr>
+            @foreach (var item in Model.Users)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.First_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Last_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Password)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Role)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Active)
+                    </td>
+                    <td>
+                        <a asp-page="Activation" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Activate\Disable</a>
+                        <a asp-page="Building_list" asp-route-id="@item.Id" class="btn btn-success btn-sm text-white">Buildings</a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    }
+</div>

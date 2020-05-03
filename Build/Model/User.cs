@@ -22,5 +22,7 @@ namespace Build.Model
         public string Password { get; set; }
         [CustomRoleValid]
         public string Role { get; set; }
+
+        public bool Active { get; set; }
     }
 }

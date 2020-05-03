@@ -134,9 +134,9 @@ namespace Build
                 validationResult = new ValidationResult(this.ErrorMessage);
                 return validationResult;
             }
-            if (value.ToString() != "seller" && value.ToString() != "buyer")
+            if (value.ToString() != "seller" && value.ToString() != "buyer" && value.ToString() != "admin")
             {
-                this.ErrorMessage = "Role must be seller of buyer";
+                this.ErrorMessage = "Role must be seller of buyer or admin";
                 validationResult = new ValidationResult(this.ErrorMessage);
             }
             if (validationResult == null)

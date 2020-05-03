@@ -46,6 +46,12 @@ namespace Build.Pages.LogReg
             if (!Crypto.VerifyHashedPassword(user_entity.Password, User.Password))
             {
                 Login_trouble = "Invalid Password";
+                return RedirectToPage(new { Login_trouble });
+            }
+            if(user_entity.Active == false)
+            {
+                Login_trouble = "User disabled";
+                return RedirectToPage(new { Login_trouble });
             }
             else
             {
